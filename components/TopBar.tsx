@@ -146,7 +146,7 @@ const TopBar = () => {
                           </DropdownMenu>
                         </NavigationMenuItem>
                       )}
-                      <NavigationMenuItem className="text-amber-500 font-bold hover:bg-amber-500 py-2 px-3 transition-all duration-500 rounded-md hover:text-black text-sm hover:font-semibold">
+                      <NavigationMenuItem className="text-green-500 font-bold hover:bg-green-500 py-2 px-3 transition-all duration-500 rounded-md hover:text-black text-sm hover:font-semibold">
                         <Link href="/transport/add" legacyBehavior passHref>
                           <NavigationMenuLink>
                             <SheetClose asChild>
@@ -322,7 +322,7 @@ const TopBar = () => {
                 </DropdownMenu>
               </NavigationMenuItem>
             )}
-            <NavigationMenuItem className="text-amber-500 font-bold hover:bg-amber-500 py-2 px-3 transition-all duration-500 rounded-md hover:text-black text-sm hover:font-semibold">
+            <NavigationMenuItem className="text-green-500 font-bold hover:bg-green-500 py-2 px-3 transition-all duration-500 rounded-md hover:text-black text-sm hover:font-semibold">
               <Link href="/transport/add" legacyBehavior passHref>
                 <NavigationMenuLink>Dodaj ogłoszenie</NavigationMenuLink>
               </Link>

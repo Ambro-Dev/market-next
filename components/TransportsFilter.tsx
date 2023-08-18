@@ -128,7 +128,7 @@ const TransportsFilter = (props: Props) => {
     <div className="flex flex-col w-full xl:px-0 px-3 pb-10">
       <Link href="/transport/add">
         <Button
-          className="rounded-full bg-amber-500 w-full transition-all duration-500"
+          className="rounded-full bg-green-500 w-full transition-all duration-500"
           size="lg"
         >
           Dodaj ogłoszenie

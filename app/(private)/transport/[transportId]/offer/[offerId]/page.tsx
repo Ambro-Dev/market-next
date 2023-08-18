@@ -102,13 +102,13 @@ const OfferCard = async (props: Props) => {
                   </Label>
                   <Label className="flex-1 space-x-2">
                     <span>Data załadunku:</span>
-                    <span className="font-semibold text-amber-500">
+                    <span className="font-semibold text-green-500">
                       {formatDate(offer.loadDate)}
                     </span>
                   </Label>
                   <Label className="flex-1 space-x-2">
                     <span>Data rozaładunku:</span>
-                    <span className="font-semibold text-amber-500">
+                    <span className="font-semibold text-green-500">
                       {formatDate(offer.unloadDate)}
                     </span>
                   </Label>
