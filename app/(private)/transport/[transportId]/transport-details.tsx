@@ -239,7 +239,7 @@ const TransportDetails = ({ transport }: { transport: Transport }) => {
           <CardHeader>
             <CardTitle>
               Opis
-              <Separator className="h-[3px] mt-3 w-1/5 bg-green-500" />
+              <Separator className="h-[3px] mt-3 w-1/5 bg-green-700" />
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -252,7 +252,7 @@ const TransportDetails = ({ transport }: { transport: Transport }) => {
             <CardHeader>
               <CardTitle>
                 Trasa
-                <Separator className="h-[3px] mt-3 bg-green-500" />
+                <Separator className="h-[3px] mt-3 bg-green-700" />
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -260,7 +260,7 @@ const TransportDetails = ({ transport }: { transport: Transport }) => {
                 <div className="flex flex-col items-center justify-start">
                   <span className="text-sm font-bold text-center">
                     Data wysyłki:{" "}
-                    <span className="text-green-500">
+                    <span className="text-green-700">
                       {formatDate(transport.sendDate)}
                     </span>
                   </span>
@@ -275,7 +275,7 @@ const TransportDetails = ({ transport }: { transport: Transport }) => {
                 <div className="flex flex-col items-center justify-between">
                   <span className="text-sm font-bold text-center">
                     Data dostawy:{" "}
-                    <span className="text-green-500">
+                    <span className="text-green-700">
                       {formatDate(transport.receiveDate)}
                     </span>
                   </span>
@@ -290,7 +290,7 @@ const TransportDetails = ({ transport }: { transport: Transport }) => {
             <CardHeader>
               <CardTitle>
                 Przedmioty
-                <Separator className="h-[3px] mt-3 bg-green-500" />
+                <Separator className="h-[3px] mt-3 bg-green-700" />
               </CardTitle>
             </CardHeader>
             <CardContent>

@@ -56,14 +56,14 @@ const TransportContactCard = async ({
           <div className="flex sm:flex-row flex-col w-full items-end space-y-4">
             <div className="flex flex-col w-full h-full justify-end">
               <span>Oferty</span>
-              <Separator className="h-[3px] mt-3 bg-green-500 w-1/5" />
+              <Separator className="h-[3px] mt-3 bg-green-700 w-1/5" />
             </div>
             {session?.user.id !== transport.creator.id && (
               <div className="flex flex-row w-full sm:justify-end gap-8">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
-                      className="rounded-full hover:bg-green-500 transition-all duration-500"
+                      className="rounded-full hover:bg-green-700 transition-all duration-500"
                       size="lg"
                     >
                       Napisz wiadomość
@@ -87,7 +87,7 @@ const TransportContactCard = async ({
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button
-                      className="rounded-full hover:bg-green-500 transition-all duration-500"
+                      className="rounded-full hover:bg-green-700 transition-all duration-500"
                       size="lg"
                       disabled={!transport.isAvailable}
                     >

@@ -151,7 +151,7 @@ export const columns: ColumnDef<User>[] = [
               <EditUserForm user={user} />
               <DropdownMenuItem
                 className={`font-bold ${
-                  user.isBlocked ? "text-green-500" : "text-red-500"
+                  user.isBlocked ? "text-green-700" : "text-red-500"
                 }`}
                 asChild
               >
