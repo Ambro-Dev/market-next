@@ -7,7 +7,7 @@ const MessengerChatBox = (props: any) => {
     <MessengerChat
       pageId="104411836066567"
       language="pl_PL"
-      themeColor="#fca503"
+      themeColor="#178735"
       loggedInGreeting="Cześć! W czym możemy Ci pomóc?"
       loggedOutGreeting="Cześć! W czym możemy Ci pomóc?"
     />
