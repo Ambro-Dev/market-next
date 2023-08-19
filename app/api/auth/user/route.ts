@@ -21,25 +21,25 @@ export const GET = async (req: NextRequest) => {
     });
   }
 
-  if (user.role === "student") {
-    const student = await prisma.student.findUnique({
+  if (user.role === "member") {
+    const member = await prisma.member.findUnique({
       where: {
         userId: user.id,
       },
     });
 
-    if (!student) {
+    if (!member) {
       return NextResponse.json({
-        error: "Nie znaleziono ucznia",
+        error: "Nie znaleziono członka",
         status: 404,
       });
     }
 
-    if (!student.name || !student.surname) {
+    if (!member.name || !member.surname) {
       return NextResponse.json({
         user: {
-          name: student.name,
-          surname: student.surname,
+          name: member.name,
+          surname: member.surname,
         },
         error: "Uzupełnij dane konta",
         status: 402,
@@ -49,8 +49,8 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({
       message: "Wszystko aktualne",
       user: {
-        name: student.name,
-        surname: student.surname,
+        name: member.name,
+        surname: member.surname,
       },
       status: 200,
     });
@@ -106,8 +106,8 @@ export const PUT = async (req: NextRequest) => {
     });
   }
 
-  if (user.role === "student") {
-    const updatedStudent = await prisma.student.update({
+  if (user.role === "member") {
+    const updatedMember = await prisma.member.update({
       where: {
         userId: user.id,
       },
@@ -120,8 +120,8 @@ export const PUT = async (req: NextRequest) => {
     return NextResponse.json({
       message: "Dane zmienione prawidłowo",
       user: {
-        name: updatedStudent.name,
-        surname: updatedStudent.surname,
+        name: updatedMember.name,
+        surname: updatedMember.surname,
       },
       status: 200,
     });

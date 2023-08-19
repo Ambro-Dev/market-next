@@ -80,7 +80,7 @@ export const OptionCard = (params: OptionParams) => {
   const { toast } = useToast();
 
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -94,7 +94,7 @@ export const OptionCard = (params: OptionParams) => {
     const data = res.data;
     if (data.message) {
       form.reset();
-      setShowNewSchoolDialog(false);
+      setShowNewSubjectDialog(false);
       setOpen(false);
       router.refresh();
       toast({
@@ -135,7 +135,10 @@ export const OptionCard = (params: OptionParams) => {
   };
   return (
     <Card className="flex flex-col">
-      <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+      <Dialog
+        open={showNewSubjectDialog}
+        onOpenChange={setShowNewSubjectDialog}
+      >
         <CardHeader className="p-5">
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
@@ -212,7 +215,7 @@ export const OptionCard = (params: OptionParams) => {
                 <DialogFooter>
                   <Button
                     variant="outline"
-                    onClick={() => setShowNewSchoolDialog(false)}
+                    onClick={() => setShowNewSubjectDialog(false)}
                   >
                     Anuluj
                   </Button>
@@ -228,7 +231,7 @@ export const OptionCard = (params: OptionParams) => {
               className="w-full"
               onClick={() => {
                 setOpen(true);
-                setShowNewSchoolDialog(true);
+                setShowNewSubjectDialog(true);
               }}
             >
               {dialog.button}

@@ -31,23 +31,23 @@ type Transport = {
 
 type Props = {
   params: {
-    schoolId: string;
+    subjectId: string;
   };
 };
 
-const getSchoolTransports = async (schoolId: string) => {
+const getSubjectTransports = async (subjectId: string) => {
   try {
     const response = await axiosInstance.get(
-      `/api/schools/school/transports?schoolId=${schoolId}`
+      `/api/subjects/subject/transports?subjectId=${subjectId}`
     );
     const data = response.data;
     return data.transports;
   } catch (error) {}
 };
 
-const SchoolTransports = async (props: Props) => {
-  const transportsData = await getSchoolTransports(
-    String(props.params.schoolId)
+const subjectTransports = async (props: Props) => {
+  const transportsData = await getSubjectTransports(
+    String(props.params.subjectId)
   );
 
   const transports = await transportsData.map((transport: Transport) => {
@@ -68,4 +68,4 @@ const SchoolTransports = async (props: Props) => {
   return <TransportsTable columns={columns} data={transports} />;
 };
 
-export default SchoolTransports;
+export default subjectTransports;

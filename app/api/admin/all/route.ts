@@ -2,18 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
 export const GET = async (req: NextRequest) => {
-  const countSchools = await prisma.school.count();
-  const countStudents = await prisma.user.count({
+  const countsubjects = await prisma.subject.count();
+  const countMembers = await prisma.user.count({
     where: {
-      role: "student",
+      role: "member",
     },
   });
   const countTransports = await prisma.transport.count();
 
   return NextResponse.json(
     {
-      schools: countSchools,
-      students: countStudents,
+      subjects: countsubjects,
+      members: countMembers,
       transports: countTransports,
     },
     { status: 200 }

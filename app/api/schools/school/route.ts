@@ -14,9 +14,9 @@ export const GET = async (req: NextRequest) => {
       id: userId,
     },
     select: {
-      student: {
+      member: {
         select: {
-          school: {
+          subject: {
             select: {
               id: true,
             },
@@ -33,5 +33,5 @@ export const GET = async (req: NextRequest) => {
     });
   }
 
-  return NextResponse.json({ school: user.student?.school.id, status: 200 });
+  return NextResponse.json({ subject: user.member?.subject.id, status: 200 });
 };

@@ -49,9 +49,9 @@ const schema = z.object({
     }),
 });
 
-const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
+const AddSubjectAdmin = ({ subjectId }: { subjectId: string }) => {
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
   const [createdUser, setCreatedUser] = React.useState({
     username: "",
     password: "",
@@ -71,15 +71,15 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
-      const response = await axiosInstance.post("/api/schools/school/admin", {
+      const response = await axiosInstance.post("/api/subjects/subject/admin", {
         ...values,
-        schoolId,
+        subjectId,
       });
       if (response.data.status === 200) {
         form.reset();
         toast({
           title: "Sukces",
-          description: "Administrator szkoły został dodany.",
+          description: "Administrator podmiotu został dodany.",
         });
         setCreatedUser(response.data.user);
       }
@@ -92,7 +92,7 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
   };
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
         <Button size="lg">Dodaj administratora</Button>
       </DialogTrigger>
@@ -100,9 +100,9 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
         {createdUser.username !== "" && createdUser.password !== "" ? (
           <div>
             <DialogHeader>
-              <DialogTitle>Administrator szkoły dodany</DialogTitle>
+              <DialogTitle>Administrator podmiotu dodany</DialogTitle>
               <DialogDescription>
-                Skopiuj dane i przekaż je administratorowi szkoły
+                Skopiuj dane i przekaż je administratorowi podmiotu
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4 py-2 pb-4">
@@ -129,7 +129,7 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   router.refresh();
                 }}
               >
@@ -143,7 +143,7 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
               <DialogHeader>
                 <DialogTitle>Dodaj administratora</DialogTitle>
                 <DialogDescription>
-                  Dodaj administratora dla szkoły
+                  Dodaj administratora dla podmiotu
                 </DialogDescription>
               </DialogHeader>
               <div>
@@ -187,7 +187,7 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
               <DialogFooter>
                 <Button
                   variant="outline"
-                  onClick={() => setShowNewSchoolDialog(false)}
+                  onClick={() => setShowNewSubjectDialog(false)}
                 >
                   Anuluj
                 </Button>
@@ -201,4 +201,4 @@ const AddSchoolAdmin = ({ schoolId }: { schoolId: string }) => {
   );
 };
 
-export default AddSchoolAdmin;
+export default AddSubjectAdmin;

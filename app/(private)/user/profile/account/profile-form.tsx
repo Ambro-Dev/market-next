@@ -54,11 +54,11 @@ type Profile = {
   email: string;
   role: string;
   bio: string;
-  school?: {
+  subject?: {
     id: string;
     name: string;
   };
-  student?: {
+  member?: {
     id: string;
     name: string;
     surname: string;

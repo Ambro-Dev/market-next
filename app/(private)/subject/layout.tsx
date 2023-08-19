@@ -8,10 +8,10 @@ import { Card } from "@/components/ui/card";
 export const metadata: Metadata = {
   title: "Profil administratora",
   description:
-    "Giełda transportowa - fenilo.pl - zleć i znajdź transport szybko i przystępnie.",
+    "Giełda transportowa - market.next.pl - zleć i znajdź transport szybko i przystępnie.",
 };
 
-export default async function SchoolManage({
+export default async function subjectManage({
   children,
 }: {
   children: React.ReactNode;
@@ -19,6 +19,6 @@ export default async function SchoolManage({
   const session = await getServerSession(authOptions);
 
   if (!session) redirect("/signin");
-  if (session.user.role !== "school_admin") redirect("/");
+  if (session.user.role !== "subject_admin") redirect("/");
   return <Card className="flex flex-col space-y-8 mb-5">{children}</Card>;
 }

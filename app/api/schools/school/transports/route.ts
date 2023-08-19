@@ -2,15 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
 export const GET = async (req: NextRequest) => {
-  const schoolId = req.nextUrl.searchParams.get("schoolId");
+  const subjectId = req.nextUrl.searchParams.get("subjectId");
 
-  if (!schoolId || schoolId === "" || schoolId === "undefined") {
-    return NextResponse.json({ error: "Brakuje ID szkoły", status: 400 });
+  if (!subjectId || subjectId === "" || subjectId === "undefined") {
+    return NextResponse.json({ error: "Brakuje ID podmiotu", status: 400 });
   }
 
-  const school = await prisma.school.findUnique({
+  const subject = await prisma.subject.findUnique({
     where: {
-      id: schoolId,
+      id: subjectId,
     },
     select: {
       transports: {
@@ -52,12 +52,12 @@ export const GET = async (req: NextRequest) => {
     },
   });
 
-  if (!school) {
+  if (!subject) {
     return NextResponse.json({
-      error: "Nie znaleziono szkoły",
+      error: "Nie znaleziono podmiotu",
       status: 404,
     });
   }
 
-  return NextResponse.json({ transports: school.transports, status: 200 });
+  return NextResponse.json({ transports: subject.transports, status: 200 });
 };

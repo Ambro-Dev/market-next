@@ -14,7 +14,7 @@ type Settings = {
   };
 };
 
-type School = {
+type subject = {
   id: string;
   administrator: {
     id: string;
@@ -60,11 +60,13 @@ const getTypes = async () => {
   }
 };
 
-const getSchool = async (userId: String) => {
+const getSubject = async (userId: String) => {
   try {
-    const res = await axiosInstance.get(`/api/schools/school?userId=${userId}`);
+    const res = await axiosInstance.get(
+      `/api/subjects/subject?userId=${userId}`
+    );
     const data = res.data;
-    return data.school;
+    return data.subject;
   } catch (error) {
     console.log(error);
     return "";
@@ -92,7 +94,7 @@ const EditTransport = async (props: Props) => {
   const categoriesData = getCategories();
   const vehiclesData = getVehicles();
   const typesData = getTypes();
-  const school = await getSchool(String(session?.user.id));
+  const subject = await getSubject(String(session?.user.id));
   const transport = await getTransport(String(props.params.transportId));
 
   if (!transport) redirect("/");
@@ -121,7 +123,7 @@ const EditTransport = async (props: Props) => {
         <CardContent>
           <EditTransportForm
             user={String(session?.user.id)}
-            school={school}
+            subject={subject}
             transport={transport}
             vehicles={vehiclesNames}
             types={typesNames}

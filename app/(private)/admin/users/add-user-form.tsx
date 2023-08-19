@@ -72,7 +72,7 @@ export const AddUserForm = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -103,7 +103,7 @@ export const AddUserForm = () => {
   };
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
         <Button>Dodaj użytkownika</Button>
       </DialogTrigger>
@@ -181,7 +181,7 @@ export const AddUserForm = () => {
               <DialogFooter>
                 <Button
                   variant="outline"
-                  onClick={() => setShowNewSchoolDialog(false)}
+                  onClick={() => setShowNewSubjectDialog(false)}
                 >
                   Anuluj
                 </Button>
@@ -234,7 +234,7 @@ export const AddUserForm = () => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   setOpen(false);
                   setCreatedUser(null);
                   router.refresh();

@@ -44,17 +44,17 @@ const schema = z.object({
   name: z
     .string()
     .min(3, {
-      message: "Nazwa szkoły musi mieć minimum 3 znaki.",
+      message: "Nazwa podmiotu musi mieć minimum 3 znaki.",
     })
     .max(255, {
-      message: "Nazwa szkoły może mieć maksymalnie 255 znaków.",
+      message: "Nazwa podmiotu może mieć maksymalnie 255 znaków.",
     }),
   plan: z.string({
     required_error: "Wybierz okres dostępu.",
   }),
 });
 
-const NewSchoolForm = (props: Props) => {
+const NewSubjectForm = (props: Props) => {
   const router = useRouter();
 
   const { toast } = useToast();
@@ -71,7 +71,7 @@ const NewSchoolForm = (props: Props) => {
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
-      const response = await axiosInstance.post("/api/schools", {
+      const response = await axiosInstance.post("/api/subjects", {
         name: values.name,
         plan: values.plan,
       });
@@ -79,9 +79,9 @@ const NewSchoolForm = (props: Props) => {
         form.reset();
         toast({
           title: "Sukces",
-          description: "Szkoła została dodana.",
+          description: "Podmiot została dodana.",
         });
-        router.push(`/admin/schools/${response.data.schoolId}`);
+        router.push(`/admin/subjects/${response.data.subjectId}`);
       }
     } catch (error) {
       toast({
@@ -96,9 +96,9 @@ const NewSchoolForm = (props: Props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <DialogHeader>
-            <DialogTitle>Dodaj szkołę</DialogTitle>
+            <DialogTitle>Dodaj podmiot</DialogTitle>
             <DialogDescription>
-              Dodaj szkołę, aby móc zarządzać jej kontem.
+              Dodaj podmiot, aby móc zarządzać jej kontem.
             </DialogDescription>
           </DialogHeader>
           <div>
@@ -109,11 +109,11 @@ const NewSchoolForm = (props: Props) => {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
-                      <FormLabel>Nazwa szkoły</FormLabel>
+                      <FormLabel>Nazwa podmiotu</FormLabel>
                       <FormControl>
                         <Input {...field} type="text" />
                       </FormControl>
-                      <FormDescription>Podaj nazwę szkoły</FormDescription>
+                      <FormDescription>Podaj nazwę podmiotu</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -157,7 +157,7 @@ const NewSchoolForm = (props: Props) => {
                         </Select>
                       </FormControl>
                       <FormDescription>
-                        Wybierz czas dostępu dla szkoły
+                        Wybierz czas dostępu dla podmiotu
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -176,4 +176,4 @@ const NewSchoolForm = (props: Props) => {
   );
 };
 
-export default NewSchoolForm;
+export default NewSubjectForm;

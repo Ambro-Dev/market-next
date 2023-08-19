@@ -8,17 +8,17 @@ import { Search } from "@/components/dashboard/search";
 import TeamSwitcher from "@/components/dashboard/team-switcher";
 
 export const metadata: Metadata = {
-  title: "Zarządzanie szkołą",
+  title: "Zarządzanie podmiotem",
   description: "Example dashboard app using the components.",
 };
 
-export default async function SchoolLayout({
+export default async function SubjectLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: {
-    schoolId: string;
+    subjectId: string;
   };
 }) {
   const session = await getServerSession(authOptions);
@@ -28,8 +28,8 @@ export default async function SchoolLayout({
     <div className="flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center justify-between px-4">
-          <TeamSwitcher schoolId={params.schoolId} />
-          <MainNav schoolId={params.schoolId} />
+          <TeamSwitcher subjectId={params.subjectId} />
+          <MainNav subjectId={params.subjectId} />
         </div>
       </div>
       <>{children}</>

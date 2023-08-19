@@ -22,10 +22,10 @@ export const authOptions: NextAuthOptions = {
           where: { username },
         });
 
-        if (user?.role === "student" || user?.role === "school_admin") {
-          const school = await prisma.school.findFirst({
+        if (user?.role === "member" || user?.role === "subject_admin") {
+          const subject = await prisma.subject.findFirst({
             where: {
-              students: {
+              members: {
                 some: {
                   userId: user?.id,
                 },
@@ -36,8 +36,8 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
-          if (school?.accessExpires && school.accessExpires < new Date()) {
-            throw new Error("Dostęp do szkoły wygasł");
+          if (subject?.accessExpires && subject.accessExpires < new Date()) {
+            throw new Error("Dostęp do podmiotu wygasł");
           }
         }
 

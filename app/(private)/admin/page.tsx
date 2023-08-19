@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
-  return <>School management</>;
+  return <>subject management</>;
 }

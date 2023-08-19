@@ -16,21 +16,21 @@ import Image from "next/image";
 import { Truck, Users } from "lucide-react";
 import { axiosInstance } from "@/lib/axios";
 import { GetExpireTimeLeft } from "@/app/lib/getExpireTimeLeft";
-import AddSchoolAdmin from "./add-school-admin";
+import AddSubjectAdmin from "./add-subject-admin";
 
 interface PageProps {
   params: {
-    schoolId: string;
+    subjectId: string;
   };
 }
 
-type SchoolWithTransports = {
-  school: {
+type subjectWithTransports = {
+  subject: {
     id: string;
     name: string;
     _count: {
       transports: number;
-      students: number;
+      members: number;
     };
     administrator: {
       id: string;
@@ -65,37 +65,39 @@ type SchoolWithTransports = {
   }[];
 };
 
-const getSchool = async (schoolId: string): Promise<SchoolWithTransports> => {
+const getSubject = async (
+  subjectId: string
+): Promise<subjectWithTransports> => {
   try {
     const res = await axiosInstance.get(
-      `/api/schools/manage?schoolId=${schoolId}`
+      `/api/subjects/manage?subjectId=${subjectId}`
     );
     return res.data;
   } catch (error) {
     console.error(error);
-    return {} as SchoolWithTransports;
+    return {} as subjectWithTransports;
   }
 };
 
-export default async function SchoolPage({ params }: PageProps) {
-  const data = await getSchool(params.schoolId);
+export default async function subjectPage({ params }: PageProps) {
+  const data = await getSubject(params.subjectId);
 
-  const timeToExpire = GetExpireTimeLeft(data.school.accessExpires);
+  const timeToExpire = GetExpireTimeLeft(data.subject.accessExpires);
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
       <div className="flex flex-col justify-center space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">
-          {data.school.name}
+          {data.subject.name}
         </h2>
         {!timeToExpire.isExpired ? (
           <p className="text-sm">
-            Dostęp dla szkoły wygaśnie za:{" "}
+            Dostęp dla podmiotu wygaśnie za:{" "}
             <span className="font-semibold">{timeToExpire.daysLeft}</span>
             {timeToExpire.daysLeft === 1 ? " dzień" : " dni"}
           </p>
         ) : (
-          <p className="text-sm text-red-500">Dostęp dla szkoły wygasł</p>
+          <p className="text-sm text-red-500">Dostęp dla podmiotu wygasł</p>
         )}
       </div>
       <Tabs defaultValue="overview" className="space-y-4">
@@ -111,20 +113,20 @@ export default async function SchoolPage({ params }: PageProps) {
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card className="col-span-2 gap-4 flex flex-row">
-              {data.school.administrator ? (
+              {data.subject.administrator ? (
                 <>
                   <div className="w-3/4">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Administrator szkoły
+                        Administrator podmiotu
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">
-                        {data.school.administrator.username}
+                        {data.subject.administrator.username}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {data.school.administrator.email}
+                        {data.subject.administrator.email}
                       </p>
                     </CardContent>
                   </div>
@@ -138,7 +140,7 @@ export default async function SchoolPage({ params }: PageProps) {
                     Jednostka nie posiada administratora, dodaj go.
                     Administrator będzie miał możliwość zarządzania jednostką.
                   </p>
-                  <AddSchoolAdmin schoolId={params.schoolId} />
+                  <AddSubjectAdmin subjectId={params.subjectId} />
                 </div>
               )}
             </Card>
@@ -151,20 +153,20 @@ export default async function SchoolPage({ params }: PageProps) {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {data.school._count.transports}
+                  {data.subject._count.transports}
                 </div>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Konta uczniów
+                  Konta członków
                 </CardTitle>
                 <Users size={24} className="text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {data.school._count.students}
+                  {data.subject._count.members}
                 </div>
               </CardContent>
             </Card>

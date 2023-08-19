@@ -10,7 +10,7 @@ export const PUT = async (req: NextRequest) => {
     id,
     category,
     type,
-    school,
+    subject,
     receiveDate,
     availableDate,
     description,
@@ -50,7 +50,7 @@ export const PUT = async (req: NextRequest) => {
       categoryId: category,
       creatorId: creator,
       typeId: type,
-      schoolId: school ? school : undefined,
+      subjectId: subject ? subject : undefined,
       directions: {
         update: directions,
       },

@@ -64,15 +64,15 @@ export const GET = async (req: NextRequest) => {
       email: true,
       role: true,
       isBlocked: true,
-      school: true,
+      subject: true,
     },
   });
 
   const usersWithoutAdmin = users.filter(
     (user) =>
       user.username !== "admin" &&
-      user.role !== "student" &&
-      user.role !== "school_admin"
+      user.role !== "member" &&
+      user.role !== "subject_admin"
   );
 
   if (!usersWithoutAdmin) {

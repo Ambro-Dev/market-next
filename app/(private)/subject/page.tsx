@@ -13,18 +13,18 @@ import { GetExpireTimeLeft } from "@/app/lib/getExpireTimeLeft";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { RecentTransports } from "@/components/dashboard/recent-transports";
-import { School } from "@prisma/client";
-import { StudentsTable } from "../admin/schools/[schoolId]/students/students-table";
-import { columns } from "../admin/schools/[schoolId]/students/columns";
-import { AddStudentForm } from "../admin/schools/[schoolId]/students/add-student-form";
+import { subject } from "@prisma/client";
+import { MembersTable } from "../admin/subjects/[subjectId]/members/members-table";
+import { columns } from "../admin/subjects/[subjectId]/members/columns";
+import { AddMemberForm } from "../admin/subjects/[subjectId]/members/add-member-form";
 
-type SchoolWithTransports = {
-  school: {
+type subjectWithTransports = {
+  subject: {
     id: string;
     name: string;
     _count: {
       transports: number;
-      students: number;
+      members: number;
     };
     administrator: {
       id: string;
@@ -59,34 +59,36 @@ type SchoolWithTransports = {
   }[];
 };
 
-const getSchool = async (schoolId: string): Promise<SchoolWithTransports> => {
+const getSubject = async (
+  subjectId: string
+): Promise<subjectWithTransports> => {
   try {
     const res = await axiosInstance.get(
-      `/api/schools/manage?schoolId=${schoolId}`
+      `/api/subjects/manage?subjectId=${subjectId}`
     );
     return res.data;
   } catch (error) {
     console.error(error);
-    return {} as SchoolWithTransports;
+    return {} as subjectWithTransports;
   }
 };
 
-const getSchoolId = async (userId: string): Promise<School> => {
+const getSubjectId = async (userId: string): Promise<subject> => {
   try {
     const res = await axiosInstance.get(
-      `/api/schools/manage/school?userId=${userId}`
+      `/api/subjects/manage/subject?userId=${userId}`
     );
-    return res.data.school;
+    return res.data.subject;
   } catch (error) {
     console.error(error);
-    return {} as School;
+    return {} as subject;
   }
 };
 
-async function getStudents(schoolId: string) {
+async function getMembers(subjectId: string) {
   try {
     const res = await axiosInstance.get(
-      `/api/schools/students?schoolId=${schoolId}`
+      `/api/subjects/members?subjectId=${subjectId}`
     );
     const data = res.data;
     return data;
@@ -96,13 +98,13 @@ async function getStudents(schoolId: string) {
   }
 }
 
-export default async function SchoolManagement() {
+export default async function subjectManagement() {
   const session = await getServerSession(authOptions);
-  const school = await getSchoolId(String(session?.user.id));
-  const data = await getSchool(school.id);
-  const students = await getStudents(school.id);
+  const subject = await getSubjectId(String(session?.user.id));
+  const data = await getSubject(subject.id);
+  const members = await getMembers(subject.id);
 
-  const timeToExpire = GetExpireTimeLeft(data.school.accessExpires);
+  const timeToExpire = GetExpireTimeLeft(data.subject.accessExpires);
 
   return (
     <Card>
@@ -112,11 +114,11 @@ export default async function SchoolManagement() {
             <div className="col-span-2">
               <div className="flex flex-col justify-center space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">
-                  {data.school.name}
+                  {data.subject.name}
                 </h2>
                 {!timeToExpire.isExpired ? (
                   <p className="text-sm">
-                    Dostęp dla szkoły wygaśnie za:{" "}
+                    Dostęp dla podmiotu wygaśnie za:{" "}
                     <span className="font-semibold">
                       {timeToExpire.daysLeft}
                     </span>
@@ -124,7 +126,7 @@ export default async function SchoolManagement() {
                   </p>
                 ) : (
                   <p className="text-sm text-red-500">
-                    Dostęp dla szkoły wygasł
+                    Dostęp dla podmiotu wygasł
                   </p>
                 )}
               </div>
@@ -144,20 +146,20 @@ export default async function SchoolManagement() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {data.school._count.transports}
+                  {data.subject._count.transports}
                 </div>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  Konta uczniów
+                  Konta członków
                 </CardTitle>
                 <Users size={24} className="text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {data.school._count.students}
+                  {data.subject._count.members}
                 </div>
               </CardContent>
             </Card>
@@ -177,8 +179,8 @@ export default async function SchoolManagement() {
             </div>
           </TabsContent>
           <TabsContent value="users">
-            <StudentsTable columns={columns} data={students} />
-            <AddStudentForm schoolId={school.id} />
+            <MembersTable columns={columns} data={members} />
+            <AddMemberForm subjectId={subject.id} />
           </TabsContent>
           <TabsContent value="transports">
             <div>Transporty</div>

@@ -60,10 +60,10 @@ import { cn } from "@/lib/utils";
 
 const menu: { title: string; href: string; description: string }[] = [
   {
-    title: "Zarządzaj szkołami",
-    href: "/admin/schools",
+    title: "Zarządzaj podmiotami",
+    href: "/admin/subjects",
     description:
-      "Zarządzaj szkołami, które są dostępne dla użytkowników aplikacji.",
+      "Zarządzaj podmiotami, które są dostępne dla użytkowników aplikacji.",
   },
   {
     title: "Dostęp dla pracowników",
@@ -96,20 +96,20 @@ const TopBar = () => {
             <SheetContent side={"left"}>
               <SheetHeader>
                 <SheetTitle>
-                  <Image src={logo} priority alt="fenilo-gielda" />
+                  <Image src={logo} priority alt="market.next-gielda" />
                 </SheetTitle>
                 <Separator />
                 <div className="flex flex-col justify-center items-center gap-12 py-10">
                   <NavigationMenu>
                     <NavigationMenuList className="gap-4 flex-col">
-                      {data?.user.role === "school_admin" && (
+                      {data?.user.role === "subject_admin" && (
                         <NavigationMenuItem>
-                          <Link href="/school" legacyBehavior passHref>
+                          <Link href="/subject" legacyBehavior passHref>
                             <NavigationMenuLink
                               className={navigationMenuTriggerStyle()}
                             >
                               <SheetClose asChild>
-                                <Button>Zarządzaj szkołą</Button>
+                                <Button>Zarządzaj podmiotem</Button>
                               </SheetClose>
                             </NavigationMenuLink>
                           </Link>
@@ -283,7 +283,7 @@ const TopBar = () => {
           <Image
             src={logo}
             priority
-            alt="gielda-fenilo"
+            alt="gielda-market.next"
             className="h-full w-auto"
           />
         </div>
@@ -293,11 +293,11 @@ const TopBar = () => {
       <div className="lg:flex flex-row justify-end gap-12 w-full py-3 hidden lg:visible bg-transparent">
         <NavigationMenu>
           <NavigationMenuList className="gap-4">
-            {data?.user.role === "school_admin" && (
+            {data?.user.role === "subject_admin" && (
               <NavigationMenuItem>
-                <Link href="/school" legacyBehavior passHref>
+                <Link href="/subject" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    <Button>Zarządzaj szkołą</Button>
+                    <Button>Zarządzaj podmiotem</Button>
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>

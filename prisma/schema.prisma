@@ -13,8 +13,8 @@ datasource db {
 enum Role {
   user
   admin
-  school_admin
-  student
+  subject_admin
+  member
 }
 
 model Account {
@@ -63,9 +63,9 @@ model User {
 
   accounts        Account[]
   sessions        Session[]
-  school          School?
+  subject         subject?
   transports      Transport[]
-  student         Student?
+  member          Member?
   messages        Message[]
   offers          Offer[]
   conversationIDs String[]       @db.ObjectId
@@ -86,7 +86,7 @@ type LatLng {
   lng Float
 }
 
-model School {
+model subject {
   id              String      @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   createdAt       DateTime    @default(now())
@@ -95,19 +95,19 @@ model School {
   administrator   User?       @relation(fields: [administratorId], references: [id], onDelete: Cascade)
   isActive        Boolean     @default(true)
   accessExpires   DateTime
-  students        Student[]
+  members         Member[]
   transports      Transport[]
 }
 
-model Student {
+model Member {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
   surname   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  schoolId  String   @db.ObjectId
+  subjectId String   @db.ObjectId
   bio       String?
-  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  subject   subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   userId    String   @unique @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -131,8 +131,8 @@ model Transport {
   typeId        String         @db.ObjectId
   type          Type           @relation(fields: [typeId], references: [id])
   objects       Object[]
-  schoolId      String?        @db.ObjectId
-  school        School?        @relation(fields: [schoolId], references: [id])
+  subjectId     String?        @db.ObjectId
+  subject       subject?       @relation(fields: [subjectId], references: [id])
   offers        Offer[]
   conversations Conversation[]
 }

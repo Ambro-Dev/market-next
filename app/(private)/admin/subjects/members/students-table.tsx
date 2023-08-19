@@ -24,15 +24,15 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
-interface StudentsTableProps<TData, TValue> {
+interface MembersTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function StudentsTable<TData, TValue>({
+export function MembersTable<TData, TValue>({
   columns,
   data,
-}: StudentsTableProps<TData, TValue>) {
+}: MembersTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

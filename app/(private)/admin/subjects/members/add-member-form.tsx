@@ -57,12 +57,12 @@ type User = {
   role: string;
 } | null;
 
-export const AddStudentForm = ({ schoolId }: { schoolId: string }) => {
+export const AddMemberForm = ({ subjectId }: { subjectId: string }) => {
   const [createdUser, setCreatedUser] = React.useState<User>(null);
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -73,9 +73,9 @@ export const AddStudentForm = ({ schoolId }: { schoolId: string }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const res = await axiosInstance.post(`/api/schools/students`, {
+    const res = await axiosInstance.post(`/api/subjects/members`, {
       ...values,
-      schoolId,
+      subjectId,
     });
     const data = res.data;
     if (data.message) {
@@ -95,9 +95,9 @@ export const AddStudentForm = ({ schoolId }: { schoolId: string }) => {
   };
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
-        <Button>Dodaj studenta</Button>
+        <Button>Dodaj membera</Button>
       </DialogTrigger>
       <DialogContent>
         {!createdUser ? (
@@ -140,7 +140,7 @@ export const AddStudentForm = ({ schoolId }: { schoolId: string }) => {
               <DialogFooter>
                 <Button
                   variant="outline"
-                  onClick={() => setShowNewSchoolDialog(false)}
+                  onClick={() => setShowNewSubjectDialog(false)}
                 >
                   Anuluj
                 </Button>
@@ -193,7 +193,7 @@ export const AddStudentForm = ({ schoolId }: { schoolId: string }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   setOpen(false);
                   setCreatedUser(null);
                   router.refresh();

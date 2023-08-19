@@ -3,15 +3,15 @@ import prisma from "@/lib/prismadb";
 import bcrypt from "bcrypt";
 
 export async function GET(req: NextRequest) {
-  const schoolId = req.nextUrl.searchParams.get("schoolId");
+  const subjectId = req.nextUrl.searchParams.get("subjectId");
 
-  if (!schoolId) {
-    return NextResponse.json({ error: "Missing schoolId" }, { status: 400 });
+  if (!subjectId) {
+    return NextResponse.json({ error: "Missing subjectId" }, { status: 400 });
   }
 
-  const students = await prisma.student.findMany({
+  const members = await prisma.member.findMany({
     where: {
-      schoolId: schoolId,
+      subjectId: subjectId,
     },
     select: {
       name: true,
@@ -26,28 +26,28 @@ export async function GET(req: NextRequest) {
     },
   });
 
-  if (!students) {
-    return NextResponse.json({ error: "No students found" }, { status: 404 });
+  if (!members) {
+    return NextResponse.json({ error: "No members found" }, { status: 404 });
   }
 
-  const studentsReturn = students.map((student) => {
+  const membersReturn = members.map((member) => {
     return {
-      id: student.user.id,
-      username: student.user.username,
-      name_and_surname: `${student.name || ""} ${student.surname || ""}`,
-      isBlocked: student.user.isBlocked,
+      id: member.user.id,
+      username: member.user.username,
+      name_and_surname: `${member.name || ""} ${member.surname || ""}`,
+      isBlocked: member.user.isBlocked,
     };
   });
 
-  return NextResponse.json(studentsReturn);
+  return NextResponse.json(membersReturn);
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const { username, schoolId, email } = await body;
+  const { username, subjectId, email } = await body;
 
-  if (!username || !schoolId || !email) {
+  if (!username || !subjectId || !email) {
     return NextResponse.json({ error: "Brakuje wymaganych pól", status: 400 });
   }
 
@@ -76,27 +76,27 @@ export async function POST(req: NextRequest) {
   const password = Math.random().toString(36).slice(-12);
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  const student = await prisma.student.create({
+  const member = await prisma.member.create({
     data: {
-      school: {
+      subject: {
         connect: {
-          id: schoolId,
+          id: subjectId,
         },
       },
       user: {
         create: {
           username: username,
           hashedPassword: hashedPassword,
-          role: "student",
+          role: "member",
           email: email,
         },
       },
     },
   });
 
-  if (!student) {
+  if (!member) {
     return NextResponse.json({
-      error: "Nie udało się dodać studenta",
+      error: "Nie udało się dodać membera",
       status: 500,
     });
   }
@@ -105,10 +105,10 @@ export async function POST(req: NextRequest) {
     user: {
       username,
       email,
-      role: "student",
+      role: "member",
       password,
     },
-    message: "Student dodany prawidłowo",
+    message: "Member dodany prawidłowo",
     status: 201,
   });
 }

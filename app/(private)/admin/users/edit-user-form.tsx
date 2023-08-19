@@ -71,7 +71,7 @@ export const EditUserForm = ({ user }: { user: User & { id: string } }) => {
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -107,7 +107,7 @@ export const EditUserForm = ({ user }: { user: User & { id: string } }) => {
         description: data.message,
       });
       router.refresh();
-      setShowNewSchoolDialog(false);
+      setShowNewSubjectDialog(false);
     } else {
       toast({
         variant: "destructive",
@@ -118,7 +118,7 @@ export const EditUserForm = ({ user }: { user: User & { id: string } }) => {
   };
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
         <Button
           className="text-sm font-semibold w-full text-left"
@@ -206,7 +206,7 @@ export const EditUserForm = ({ user }: { user: User & { id: string } }) => {
               <DialogFooter>
                 <Button
                   variant="outline"
-                  onClick={() => setShowNewSchoolDialog(false)}
+                  onClick={() => setShowNewSubjectDialog(false)}
                 >
                   Anuluj
                 </Button>
@@ -270,7 +270,7 @@ export const EditUserForm = ({ user }: { user: User & { id: string } }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   setOpen(false);
                   setCreatedUser(null);
                   router.refresh();

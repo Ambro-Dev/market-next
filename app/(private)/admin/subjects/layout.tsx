@@ -6,10 +6,10 @@ import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Profil administratora",
   description:
-    "Giełda transportowa - fenilo.pl - zleć i znajdź transport szybko i przystępnie.",
+    "Giełda transportowa - market.next.pl - zleć i znajdź transport szybko i przystępnie.",
 };
 
-export default async function SchoolLayout({
+export default async function SubjectLayout({
   children,
 }: {
   children: React.ReactNode;

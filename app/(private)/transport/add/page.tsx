@@ -13,7 +13,7 @@ type Settings = {
   };
 };
 
-type School = {
+type subject = {
   id: string;
   administrator: {
     id: string;
@@ -53,11 +53,13 @@ const getTypes = async () => {
   }
 };
 
-const getSchool = async (userId: String) => {
+const getSubject = async (userId: String) => {
   try {
-    const res = await axiosInstance.get(`/api/schools/school?userId=${userId}`);
+    const res = await axiosInstance.get(
+      `/api/subjects/subject?userId=${userId}`
+    );
     const data = res.data;
-    return data.school;
+    return data.subject;
   } catch (error) {
     console.log(error);
     return "";
@@ -72,7 +74,7 @@ const AddTransportPage = async () => {
   const categoriesData = getCategories();
   const vehiclesData = getVehicles();
   const typesData = getTypes();
-  const school = await getSchool(String(session?.user.id));
+  const subject = await getSubject(String(session?.user.id));
 
   const [vehicles, categories, types] = await Promise.all<Settings[]>([
     vehiclesData,
@@ -95,7 +97,7 @@ const AddTransportPage = async () => {
       <Card className="w-full h-full pt-5">
         <CardContent>
           <AddTransportForm
-            school={school}
+            subject={subject}
             vehicles={vehiclesNames}
             types={typesNames}
             categories={categoriesNames}

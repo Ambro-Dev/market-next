@@ -2,18 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
 export const GET = async (req: NextRequest) => {
-  const schools = await prisma.school.findMany({
+  const subjects = await prisma.subject.findMany({
     select: {
       id: true,
       name: true,
     },
   });
 
-  if (!schools) {
+  if (!subjects) {
     return NextResponse.json({ error: "Nie znaleziono szkół", status: 422 });
   }
 
-  return NextResponse.json({ schools, status: 200 });
+  return NextResponse.json({ subjects, status: 200 });
 };
 
 export const POST = async (req: NextRequest) => {
@@ -25,15 +25,15 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json({ error: "Brakuje wymaganych pól", status: 400 });
   }
 
-  const schoolExists = await prisma.school.findFirst({
+  const subjectExists = await prisma.subject.findFirst({
     where: {
       name,
     },
   });
 
-  if (schoolExists) {
+  if (subjectExists) {
     return NextResponse.json({
-      error: "Szkoła o takiej nazwie już istnieje",
+      error: "Podmiot o takiej nazwie już istnieje",
       status: 422,
     });
   }
@@ -57,23 +57,23 @@ export const POST = async (req: NextRequest) => {
     return date;
   };
 
-  const school = await prisma.school.create({
+  const subject = await prisma.subject.create({
     data: {
       name,
       accessExpires: expireDate(),
     },
   });
 
-  if (!school) {
+  if (!subject) {
     return NextResponse.json({
-      error: "Błąd podczas dodawania szkoły",
+      error: "Błąd podczas dodawania podmiotu",
       status: 422,
     });
   }
 
   return NextResponse.json({
-    message: "Szkoła dodana",
-    schoolId: school.id,
+    message: "Podmiot dodana",
+    subjectId: subject.id,
     status: 200,
   });
 };

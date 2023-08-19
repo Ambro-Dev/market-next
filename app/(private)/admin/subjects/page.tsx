@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 type Data = {
   transports: number;
-  schools: number;
-  students: number;
+  subjects: number;
+  members: number;
 };
 
 const getData = async (): Promise<Data> => {
@@ -26,19 +26,19 @@ const getData = async (): Promise<Data> => {
     console.error(error);
     return {
       transports: 0,
-      schools: 0,
-      students: 0,
+      subjects: 0,
+      members: 0,
     };
   }
 };
 
-export default async function SchoolManagement() {
+export default async function SubjectManagement() {
   const data: Data = await getData();
   return (
     <div className="flex flex-col">
       <div className="border-b">
         <div className="flex h-16 items-center px-4">
-          <TeamSwitcher schoolId="" />
+          <TeamSwitcher subjectId="" />
           <div className="ml-auto flex items-center space-x-4">
             <Search />
           </div>
@@ -48,17 +48,17 @@ export default async function SchoolManagement() {
         <div className="grid">
           <ArrowUp size={24} className="ml-10" />
           <p className="text-sm">
-            Wybierz lub wyszukaj istniejącą szkołę z listy rozwijanej lub dodaj
-            nową
+            Wybierz lub wyszukaj istniejący podmiot z listy rozwijanej lub dodaj
+            nowy.
           </p>
         </div>
         <Card className="grid">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Szkoły</CardTitle>
+            <CardTitle className="text-sm font-medium">Podmioty</CardTitle>
             <School size={24} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.schools}</div>
+            <div className="text-2xl font-bold">{data.subjects}</div>
           </CardContent>
         </Card>
         <Card className="grid">
@@ -75,12 +75,12 @@ export default async function SchoolManagement() {
         <Card className="grid">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              Wszystkich studentów
+              Wszystkich memberów
             </CardTitle>
             <Users size={24} />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{data.students}</div>
+            <div className="text-2xl font-bold">{data.members}</div>
           </CardContent>
         </Card>
       </div>

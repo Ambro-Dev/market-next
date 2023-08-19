@@ -15,9 +15,9 @@ import { axiosInstance } from "@/lib/axios";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Giełda transportowa - fenilo.pl",
+  title: "Giełda transportowa - market.next.pl",
   description:
-    "Giełda transportowa - fenilo.pl - zleć i znajdź transport szybko i przystępnie.",
+    "Giełda transportowa - market.next.pl - zleć i znajdź transport szybko i przystępnie.",
 };
 
 export default async function RootLayout({

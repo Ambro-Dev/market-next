@@ -21,13 +21,13 @@ export async function GET(req: NextRequest) {
       email: true,
       bio: true,
       role: true,
-      school: {
+      subject: {
         select: {
           id: true,
           name: true,
         },
       },
-      student: {
+      member: {
         select: {
           id: true,
           name: true,

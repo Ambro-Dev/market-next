@@ -48,7 +48,7 @@ export const POST = async (req: NextRequest) => {
   if (existingOffer) {
     return NextResponse.json(
       {
-        error: "Wysłałeś/aś już ofertę dla tego transportu, edytuj istniejącą",
+        error: "Wysłałeś/aś już ofertę dla tego transportu, edytuj istniejący",
       },
       { status: 400 }
     );

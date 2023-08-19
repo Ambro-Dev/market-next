@@ -26,28 +26,28 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useRouter } from "next/navigation";
-import NewSchoolForm from "./new-school-form";
+import NewSubjectForm from "./new-subject-form";
 import { axiosInstance } from "@/lib/axios";
 
-type Schools = {
+type subjects = {
   id: string;
   name: string;
 };
 
-export default function SchoolSwitcher({
-  schoolId,
+export default function SubjectSwitcher({
+  subjectId,
 }: {
-  schoolId: string | undefined;
+  subjectId: string | undefined;
 }) {
-  const [schools, setSchools] = React.useState<Schools[]>([]);
+  const [subjects, setSubjects] = React.useState<subjects[]>([]);
 
   const router = useRouter();
 
-  async function fetchSchools() {
+  async function fetchsubjects() {
     try {
-      const res = await axiosInstance.get(`/api/schools`);
+      const res = await axiosInstance.get(`/api/subjects`);
       const data = res.data;
-      setSchools(data.schools);
+      setSubjects(data.subjects);
     } catch (error) {
       console.log(error);
       return [];
@@ -55,38 +55,41 @@ export default function SchoolSwitcher({
   }
 
   React.useEffect(() => {
-    if (schools?.length > 0) return;
-    fetchSchools();
-  }, [schoolId, schools]);
+    if (subjects?.length > 0) return;
+    fetchsubjects();
+  }, [subjectId, subjects]);
 
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
-  const [selectedSchool, setSelectedSchool] = React.useState(schoolId);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
+  const [selectedsubject, setSelectedsubject] = React.useState(subjectId);
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            aria-label="Wybierz szkołę"
+            aria-label="Wybierz podmiot"
             className={cn("w-[200px] justify-between")}
           >
-            {selectedSchool ? (
+            {selectedsubject ? (
               <>
                 <Avatar className="mr-2 h-5 w-5">
                   <AvatarFallback>
-                    {schools
-                      .find((school) => school.id === selectedSchool)
+                    {subjects
+                      .find((subject) => subject.id === selectedsubject)
                       ?.name.substring(0, 1)}
                   </AvatarFallback>
                 </Avatar>
-                {schools.find((school) => school.id === selectedSchool)?.name}
+                {
+                  subjects.find((subject) => subject.id === selectedsubject)
+                    ?.name
+                }
               </>
             ) : (
-              "Wybierz szkołę..."
+              "Wybierz podmiot..."
             )}
             <CaretSortIcon className="ml-auto h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -94,29 +97,29 @@ export default function SchoolSwitcher({
         <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandList>
-              <CommandInput placeholder="Szukaj szkoły..." />
-              <CommandEmpty>Brak szkoły.</CommandEmpty>
-              {schools.length > 0 && (
-                <CommandGroup key="schools" heading="Wszystkie szkoły">
-                  {schools.map((school) => (
+              <CommandInput placeholder="Szukaj podmiotu..." />
+              <CommandEmpty>Brak podmiotu.</CommandEmpty>
+              {subjects.length > 0 && (
+                <CommandGroup key="subjects" heading="Wszystkie podmiotu">
+                  {subjects.map((subject) => (
                     <CommandItem
-                      key={school.id}
+                      key={subject.id}
                       onSelect={() => {
                         setOpen(false);
-                        router.push(`/admin/schools/${school.id}`);
+                        router.push(`/admin/subjects/${subject.id}`);
                       }}
                       className="text-sm"
                     >
                       <Avatar className="mr-2 h-5 w-5">
                         <AvatarFallback>
-                          {school.name.substring(0, 1)}
+                          {subject.name.substring(0, 1)}
                         </AvatarFallback>
                       </Avatar>
-                      {school.name}
+                      {subject.name}
                       <CheckIcon
                         className={cn(
                           "ml-auto h-4 w-4",
-                          selectedSchool === school.id
+                          selectedsubject === subject.id
                             ? "opacity-100"
                             : "opacity-0"
                         )}
@@ -133,11 +136,11 @@ export default function SchoolSwitcher({
                   <CommandItem
                     onSelect={() => {
                       setOpen(false);
-                      setShowNewSchoolDialog(true);
+                      setShowNewSubjectDialog(true);
                     }}
                   >
                     <PlusCircledIcon className="mr-2 h-5 w-5" />
-                    Dodaj szkołę
+                    Dodaj podmiot
                   </CommandItem>
                 </DialogTrigger>
               </CommandGroup>
@@ -145,7 +148,7 @@ export default function SchoolSwitcher({
           </Command>
         </PopoverContent>
       </Popover>
-      <NewSchoolForm />
+      <NewSubjectForm />
     </Dialog>
   );
 }

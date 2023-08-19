@@ -5,7 +5,7 @@ export const GET = async (req: NextRequest) => {
   const userId = req.nextUrl.searchParams.get("userId");
   if (!userId || userId === "" || userId === "undefined") {
     return NextResponse.json({
-      error: "Brakuje parametru schoolId",
+      error: "Brakuje parametru subjectId",
       status: 400,
     });
   }
@@ -20,18 +20,18 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ error: "Użytkownik nie istnieje", status: 404 });
   }
 
-  const school = await prisma.school.findFirst({
+  const subject = await prisma.subject.findFirst({
     where: {
       administratorId: userId,
     },
   });
 
-  if (!school) {
+  if (!subject) {
     return NextResponse.json({
-      error: "Użytkownik nie jest administratorem żadnej szkoły",
+      error: "Użytkownik nie jest administratorem żadnej podmiotu",
       status: 404,
     });
   }
 
-  return NextResponse.json({ school, status: 200 });
+  return NextResponse.json({ subject, status: 200 });
 };

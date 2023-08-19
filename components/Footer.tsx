@@ -1,6 +1,7 @@
 import React from "react";
 import { Separator } from "@/components//ui/separator";
 import Link from "next/link";
+import { Github } from "lucide-react";
 
 type Props = {};
 
@@ -12,34 +13,15 @@ const Footer = (props: Props) => {
           <h3>O nas</h3>
           <Separator className="w-12 h-[2px] bg-green-700" />
           <p className="font-light font-sans">
-            Jesteśmy firmą, która powstała, żeby odpowiedzieć na potrzeby branży
-            transportowej. Zajmujemy się szkoleniami, ubezpieczeniami,
-            zapewniamy łatwy dostęp do akcesoriów niezbędnych w transporcie.
-            Zaufaj nam - razem stworzymy lepszy transport.
+            Integer ultrices malesuada elementum. Nulla facilisi. Phasellus
+            porttitor velit orci, sed placerat dui scelerisque ut. Proin feugiat
+            vestibulum mi, ac tincidunt quam maximus cursus. Suspendisse
+            potenti. Nunc euismod nisi ac vehicula pharetra. Morbi feugiat
+            rutrum nibh a venenatis. Aenean feugiat turpis quis libero luctus
+            aliquet. Vestibulum tempor leo id eros vulputate dictum.
           </p>
-          <Link href="https://www.facebook.com/groups/739523837210433">
-            <svg
-              className="h-6 w-6 group hover:cursor-pointer hover:scale-110 transition-all duration-500"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H12V13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H12V9.5C12 7.567 13.567 6 15.5 6H16.1C16.6523 6 17.1 6.44772 17.1 7C17.1 7.55228 16.6523 8 16.1 8H15.5C14.6716 8 14 8.67157 14 9.5V11H16.1C16.6523 11 17.1 11.4477 17.1 12C17.1 12.5523 16.6523 13 16.1 13H14V20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6Z"
-                  fill="#FFFFFF"
-                ></path>{" "}
-              </g>
-            </svg>
+          <Link href="https://www.github.com/Ambro-Dev" target="_blank">
+            <Github size={20} />
           </Link>
         </div>
         <div className="flex flex-row gap-4 w-full">
@@ -47,17 +29,11 @@ const Footer = (props: Props) => {
             <h3 className="text-white">Przydatne linki</h3>
             <Separator className="w-12 h-[2px] bg-green-700" />
             <div className="flex flex-col w-full gap-4 text-neutral-600 text-sm uppercase">
-              <a
-                className="hover:text-green-700 transition-all duration-500"
-                href="/privacy-policy"
-              >
+              <a className="hover:text-green-700 transition-all duration-500">
                 Polityka prywatności
               </a>
               <Separator className="bg-neutral-600 w-4/5" />
-              <a
-                className="hover:text-green-700 transition-all duration-500"
-                href="/regulamin"
-              >
+              <a className="hover:text-green-700 transition-all duration-500">
                 Regulamin
               </a>
             </div>
@@ -93,12 +69,12 @@ const Footer = (props: Props) => {
                     </g>
                   </svg>
                   <p className="group-hover:text-green-700 transition-all duration-500">
-                    +48 789 567 099
+                    +48 123 456 789
                   </p>
                 </div>
               </Link>
 
-              <Link href="mailto:gielda@fenilo.pl">
+              <Link href="lorem.ipsum@market.next.com">
                 <div className="flex flex-row gap-4 group hover:cursor-pointer text-white">
                   <svg
                     className="w-6 h-6 group-hover:scale-110 transition-all duration-500"
@@ -124,7 +100,7 @@ const Footer = (props: Props) => {
                     </g>
                   </svg>
                   <p className="group-hover:text-green-700 transition-all duration-500 ">
-                    gielda@fenilo.pl
+                    lorem.ipsum@market.next.com
                   </p>
                 </div>
               </Link>

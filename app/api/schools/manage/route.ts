@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
 export const GET = async (req: NextRequest) => {
-  const schoolId = req.nextUrl.searchParams.get("schoolId");
-  if (!schoolId || schoolId === "" || schoolId === "undefined") {
-    return NextResponse.json({ error: "Missing schoolId" }, { status: 400 });
+  const subjectId = req.nextUrl.searchParams.get("subjectId");
+  if (!subjectId || subjectId === "" || subjectId === "undefined") {
+    return NextResponse.json({ error: "Missing subjectId" }, { status: 400 });
   }
-  const school = await prisma.school.findUnique({
+  const subject = await prisma.subject.findUnique({
     where: {
-      id: schoolId,
+      id: subjectId,
     },
     select: {
       id: true,
@@ -16,7 +16,7 @@ export const GET = async (req: NextRequest) => {
       _count: {
         select: {
           transports: true,
-          students: true,
+          members: true,
         },
       },
       administrator: {
@@ -30,16 +30,16 @@ export const GET = async (req: NextRequest) => {
     },
   });
 
-  if (!school) {
+  if (!subject) {
     return NextResponse.json(
-      { error: "Brak wyszukiwanej szkoły" },
+      { error: "Brak wyszukiwanej podmiotu" },
       { status: 404 }
     );
   }
 
   const latestTransports = await prisma.transport.findMany({
     where: {
-      schoolId: schoolId,
+      subjectId: subjectId,
     },
     orderBy: {
       createdAt: "desc",
@@ -81,5 +81,5 @@ export const GET = async (req: NextRequest) => {
     },
   });
 
-  return NextResponse.json({ school, latestTransports });
+  return NextResponse.json({ subject, latestTransports });
 };

@@ -104,7 +104,7 @@ type Destination = {
   lng: number;
 };
 
-type School = {
+type subject = {
   id: string;
   administrator: {
     id: string;
@@ -117,12 +117,12 @@ type Settings = {
 };
 
 export function AddTransportForm({
-  school,
+  subject,
   categories,
   types,
   vehicles,
 }: {
-  school: School;
+  subject: subject;
   categories: Settings[];
   types: Settings[];
   vehicles: Settings[];
@@ -157,7 +157,7 @@ export function AddTransportForm({
         finish: endDestination,
       },
       creator: data?.user?.id,
-      school: school ? school : undefined,
+      subject: subject ? subject : undefined,
     };
 
     try {

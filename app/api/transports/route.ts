@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest) => {
     vehicle,
     category,
     type,
-    school,
+    subject,
     receiveDate,
     availableDate,
     description,
@@ -37,7 +37,7 @@ export const POST = async (req: NextRequest) => {
       categoryId: category,
       creatorId: creator,
       typeId: type,
-      schoolId: school ? school : undefined,
+      subjectId: subject ? subject : undefined,
       directions: {
         start: {
           lat: directions.start.lat,
@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest) => {
       categoryId: category,
       creatorId: creator,
       typeId: type,
-      schoolId: school ? school : undefined,
+      subjectId: subject ? subject : undefined,
       directions: {
         create: directions,
       },

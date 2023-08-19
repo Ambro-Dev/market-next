@@ -5,9 +5,9 @@ import bcrypt from "bcrypt";
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
-  const { username, email, schoolId } = body;
+  const { username, email, subjectId } = body;
 
-  if (!username || !email || !schoolId) {
+  if (!username || !email || !subjectId) {
     return NextResponse.json({ error: "Brakuje wymaganych pól", status: 400 });
   }
 
@@ -37,15 +37,15 @@ export const POST = async (req: NextRequest) => {
     });
   }
 
-  const school = await prisma.school.findUnique({
+  const subject = await prisma.subject.findUnique({
     where: {
-      id: schoolId,
+      id: subjectId,
     },
   });
 
-  if (!school) {
+  if (!subject) {
     return NextResponse.json({
-      error: "Podana szkoła nie istnieje",
+      error: "Podana podmiot nie istnieje",
       status: 400,
     });
   }
@@ -58,11 +58,11 @@ export const POST = async (req: NextRequest) => {
     data: {
       username,
       email,
-      role: "school_admin",
+      role: "subject_admin",
       hashedPassword,
-      school: {
+      subject: {
         connect: {
-          id: schoolId,
+          id: subjectId,
         },
       },
     },

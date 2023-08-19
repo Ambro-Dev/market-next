@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Konto użytkownika",
   description:
-    "Giełda transportowa - fenilo.pl - zleć i znajdź transport szybko i przystępnie.",
+    "Giełda transportowa - market.next.pl - zleć i znajdź transport szybko i przystępnie.",
 };
 
 const sidebarNavItems = [

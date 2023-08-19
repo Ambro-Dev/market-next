@@ -21,14 +21,14 @@ const notSelected =
 const selected = "text-sm font-medium transition-colors hover:text-primary";
 
 export function MainNav({
-  schoolId,
+  subjectId,
   ...props
 }: {
-  schoolId: string | undefined;
+  subjectId: string | undefined;
 }) {
   const pathname = usePathname();
 
-  if (pathname === "/admin/schools") return null;
+  if (pathname === "/admin/subjects") return null;
 
   return (
     <>
@@ -39,17 +39,17 @@ export function MainNav({
         {...props}
       >
         <Link
-          href={`/admin/schools/${schoolId}`}
+          href={`/admin/subjects/${subjectId}`}
           className={
-            pathname === `/admin/schools/${schoolId}` ? selected : notSelected
+            pathname === `/admin/subjects/${subjectId}` ? selected : notSelected
           }
         >
           Panel gówny
         </Link>
         <Link
-          href={`/admin/schools/${schoolId}/students`}
+          href={`/admin/subjects/${subjectId}/members`}
           className={
-            pathname === `/admin/schools/${schoolId}/students`
+            pathname === `/admin/subjects/${subjectId}/members`
               ? selected
               : notSelected
           }
@@ -57,9 +57,9 @@ export function MainNav({
           Użytkownicy
         </Link>
         <Link
-          href={`/admin/schools/${schoolId}/transports`}
+          href={`/admin/subjects/${subjectId}/transports`}
           className={
-            pathname === `/admin/schools/${schoolId}/transports`
+            pathname === `/admin/subjects/${subjectId}/transports`
               ? selected
               : notSelected
           }
@@ -89,9 +89,9 @@ export function MainNav({
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
                 <Link
-                  href={`/admin/schools/${schoolId}`}
+                  href={`/admin/subjects/${subjectId}`}
                   className={
-                    pathname === `/admin/schools/${schoolId}`
+                    pathname === `/admin/subjects/${subjectId}`
                       ? selected
                       : notSelected
                   }
@@ -101,9 +101,9 @@ export function MainNav({
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
-                  href={`/admin/schools/${schoolId}/students`}
+                  href={`/admin/subjects/${subjectId}/members`}
                   className={
-                    pathname === `/admin/schools/${schoolId}/students`
+                    pathname === `/admin/subjects/${subjectId}/members`
                       ? selected
                       : notSelected
                   }
@@ -113,9 +113,9 @@ export function MainNav({
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
-                  href={`/admin/schools/${schoolId}/transports`}
+                  href={`/admin/subjects/${subjectId}/transports`}
                   className={
-                    pathname === `/admin/schools/${schoolId}/transports`
+                    pathname === `/admin/subjects/${subjectId}/transports`
                       ? selected
                       : notSelected
                   }

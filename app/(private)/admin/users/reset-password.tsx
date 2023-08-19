@@ -28,7 +28,7 @@ export const ResetPassword = ({ userId }: { userId: string }) => {
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = React.useState(false);
-  const [showNewSchoolDialog, setShowNewSchoolDialog] = React.useState(false);
+  const [showNewSubjectDialog, setShowNewSubjectDialog] = React.useState(false);
 
   const onSubmit = async () => {
     try {
@@ -56,7 +56,7 @@ export const ResetPassword = ({ userId }: { userId: string }) => {
   };
 
   return (
-    <Dialog open={showNewSchoolDialog} onOpenChange={setShowNewSchoolDialog}>
+    <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
         <Button
           className="text-sm font-semibold w-full justify-start"
@@ -82,7 +82,7 @@ export const ResetPassword = ({ userId }: { userId: string }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   setOpen(false);
                   setResetedUser(null);
                 }}
@@ -133,7 +133,7 @@ export const ResetPassword = ({ userId }: { userId: string }) => {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setShowNewSchoolDialog(false);
+                  setShowNewSubjectDialog(false);
                   setOpen(false);
                   setResetedUser(null);
                   router.refresh();
