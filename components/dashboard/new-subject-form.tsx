@@ -79,7 +79,7 @@ const NewSubjectForm = (props: Props) => {
         form.reset();
         toast({
           title: "Sukces",
-          description: "Podmiot została dodana.",
+          description: "Podmiot został dodany.",
         });
         router.push(`/admin/subjects/${response.data.subjectId}`);
       }

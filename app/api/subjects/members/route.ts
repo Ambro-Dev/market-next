@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
 
   if (!member) {
     return NextResponse.json({
-      error: "Nie udało się dodać membera",
+      error: "Nie udało się dodać członka",
       status: 500,
     });
   }
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
       role: "member",
       password,
     },
-    message: "Member dodany prawidłowo",
+    message: "Członek dodany prawidłowo",
     status: 201,
   });
 }

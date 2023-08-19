@@ -97,7 +97,7 @@ export const AddMemberForm = ({ subjectId }: { subjectId: string }) => {
   return (
     <Dialog open={showNewSubjectDialog} onOpenChange={setShowNewSubjectDialog}>
       <DialogTrigger asChild>
-        <Button>Dodaj membera</Button>
+        <Button>Dodaj członka</Button>
       </DialogTrigger>
       <DialogContent>
         {!createdUser ? (
