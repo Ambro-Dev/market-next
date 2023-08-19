@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EditUserForm } from "../../users/edit-user-form";
+import { EditUserForm } from "../../../users/edit-user-form";
 import {
   Dialog,
   DialogContent,
@@ -21,8 +21,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ResetPassword } from "../../users/reset-password";
-import { blockUser, unblockUser } from "../../users/columns";
+import { ResetPassword } from "../../../users/reset-password";
+import { blockUser, unblockUser } from "../../../users/columns";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
