@@ -53,7 +53,7 @@ import {
   PenBox,
   Menu,
   Search,
-  Facebook,
+  Github,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -268,7 +268,12 @@ const TopBar = () => {
                   </NavigationMenu>
                   <div className="flex flex-row justify-center items-center gap-4">
                     <Search size={20} />
-                    <Facebook size={20} />
+                    <Link
+                      href="https://www.github.com/Ambro-Dev"
+                      target="_blank"
+                    >
+                      <Github size={20} />
+                    </Link>
                   </div>
                 </div>
               </SheetHeader>
@@ -418,7 +423,9 @@ const TopBar = () => {
         </NavigationMenu>
         <div className="flex flex-row justify-center items-center gap-4">
           <Search size={20} />
-          <Facebook size={20} />
+          <Link href="https://www.github.com/Ambro-Dev" target="_blank">
+            <Github size={20} />
+          </Link>
         </div>
       </div>
     </div>
