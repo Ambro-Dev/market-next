@@ -20,7 +20,7 @@ const Footer = (props: Props) => {
             rutrum nibh a venenatis. Aenean feugiat turpis quis libero luctus
             aliquet. Vestibulum tempor leo id eros vulputate dictum.
           </p>
-          <Link href="https://www.github.com/Ambro-Dev" target="_blank">
+          <Link href="https://github.com/Ambro-Dev/market-next" target="_blank">
             <Github size={20} />
           </Link>
         </div>

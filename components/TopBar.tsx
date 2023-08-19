@@ -269,7 +269,7 @@ const TopBar = () => {
                   <div className="flex flex-row justify-center items-center gap-4">
                     <Search size={20} />
                     <Link
-                      href="https://www.github.com/Ambro-Dev"
+                      href="https://github.com/Ambro-Dev/market-next"
                       target="_blank"
                     >
                       <Github size={20} />
@@ -423,7 +423,7 @@ const TopBar = () => {
         </NavigationMenu>
         <div className="flex flex-row justify-center items-center gap-4">
           <Search size={20} />
-          <Link href="https://www.github.com/Ambro-Dev" target="_blank">
+          <Link href="https://github.com/Ambro-Dev/market-next" target="_blank">
             <Github size={20} />
           </Link>
         </div>
